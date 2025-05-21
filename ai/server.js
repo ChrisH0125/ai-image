@@ -18,7 +18,7 @@ app.post('/ai', async (req, res) => {
   const prompt = req.body.prompt;
 
   try {
-    const aiResponse = await openai.createImage({
+    const aiResponse = await openai.images.generate({
       prompt,
       n: 1,
       size: '1024x1024',
