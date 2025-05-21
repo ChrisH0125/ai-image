@@ -7,7 +7,7 @@ import express from 'express';
 import cors from 'cors';
 
 const openai = new OpenAI({
-  api_key: process.env.OPENAI, 
+  apiKey: process.env.OPENAI, 
 });
 
 const app = express();
