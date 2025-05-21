@@ -17,9 +17,14 @@ app.use(express.json());
 app.post('/ai', async (req, res) => {
   const prompt = req.body.prompt;
 
+  if (!prompt || typeof prompt !== 'string' || prompt.trim().length === 0) {
+    return res.status(400).send("Prompt must be a non-empty string.");
+  }
+
   try {
     const aiResponse = await openai.images.generate({
-      prompt,
+      model: "dall-e-3",
+      prompt: prompt.trim(),
       n: 1,
       size: '1024x1024',
     });
@@ -28,8 +33,12 @@ app.post('/ai', async (req, res) => {
     res.send({ image });
   } catch (error) {
     console.error("Error generating image:", error);
+    if (error.response) {
+      console.error("OpenAI API error response:", error.response.data);
+    }
     res.status(500).send("Image generation failed.");
   }
 });
+
 
 app.listen(8080, () => console.log('Server listening on http://localhost:8080/ai'));
