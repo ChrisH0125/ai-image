@@ -32,4 +32,4 @@ app.post('/ai', async (req, res) => {
   }
 });
 
-app.listen(8080, () => console.log('Server listening on http://localhost:8080'));
+app.listen(8080, () => console.log('Server listening on http://localhost:8080/ai'));
